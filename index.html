@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Plataforma educativa para carreras, cursos y materiales.">
+  <title>EduClass | Ing3nieria</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="css/tooplate-style.css">
+</head>
+<body data-page="dashboard">
+  <nav class="navbar navbar-expand-sm navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><i class='uil uil-book-open'></i> EduClass</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegación">
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a href="#inicio" class="nav-link"><span data-hover="Inicio">Inicio</span></a></li>
+          <li class="nav-item"><a href="#carreras" class="nav-link"><span data-hover="Carreras">Carreras</span></a></li>
+          <li class="nav-item"><a href="#cursos" class="nav-link"><span data-hover="Cursos">Cursos</span></a></li>
+          <li class="nav-item admin-only"><a href="#administracion" class="nav-link"><span data-hover="Administración">Administración</span></a></li>
+        </ul>
+        <ul class="navbar-nav ml-lg-auto align-items-center">
+          <li class="nav-item mr-lg-3"><button class="login-button" id="loginButton" type="button"><i class='uil uil-user-circle'></i> <span id="loginButtonText">Iniciar sesión</span></button></li>
+          <li class="ml-lg-2"><div class="color-mode d-lg-flex justify-content-center align-items-center" role="button" tabindex="0"><i class="color-mode-icon"></i> Modo de color</div></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="about full-screen d-lg-flex justify-content-center align-items-center" id="inicio">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
+          <div class="about-text">
+            <span class="small-text">Plataforma educativa</span>
+            <h1 class="animated animated-text"><span class="mr-2">Organiza</span><div class="animated-info"><span class="animated-item">carreras</span><span class="animated-item">cursos</span><span class="animated-item">materiales</span></div></h1>
+            <p>Consulta cursos y materiales en modo lectura. Los administradores pueden crear carreras, editar cursos y subir archivos.</p>
+            <div class="custom-btn-group mt-4">
+              <a href="#administracion" class="btn mr-lg-2 custom-btn custom-btn-link admin-only"><i class='uil uil-plus-circle'></i> Crear contenido</a>
+              <a href="#cursos" class="btn custom-btn custom-btn-bg custom-btn-link">Ver cursos</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-12 col-12">
+          <div class="hero-panel">
+            <div class="hero-card floating-card"><span class="hero-icon"><i class='uil uil-university'></i></span><h3>Carreras</h3><p>Bloques académicos organizados por semestre.</p></div>
+            <div class="hero-card"><span class="hero-icon"><i class='uil uil-folder-upload'></i></span><h3>Materiales</h3><p>Programa, exámenes, actividades y contenido.</p></div>
+            <div class="hero-card floating-card delay-card"><span class="hero-icon"><i class='uil uil-shield-check'></i></span><h3>Roles</h3><p>Visitantes leen; administradores gestionan.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-section py-4">
+    <div class="container"><div class="row" id="statsRow">
+      <div class="col-md-3 col-6 mb-3"><div class="stat-card"><strong id="careerCount">0</strong><span>Carreras</span></div></div>
+      <div class="col-md-3 col-6 mb-3"><div class="stat-card"><strong id="courseCount">0</strong><span>Cursos</span></div></div>
+      <div class="col-md-3 col-6 mb-3"><div class="stat-card"><strong id="materialCount">0</strong><span>Materiales</span></div></div>
+      <div class="col-md-3 col-6 mb-3"><div class="stat-card"><strong id="semesterCount">0</strong><span>Semestres máximos</span></div></div>
+    </div></div>
+  </section>
+
+  <section class="py-5" id="carreras">
+    <div class="container">
+      <div class="section-heading text-center mb-5"><span class="small-text">Bloques académicos</span><h2>Carreras registradas</h2><p>Dentro de cada carrera puedes consultar cursos y materiales.</p></div>
+      <div class="row" id="careerGrid"></div>
+    </div>
+  </section>
+
+  <section class="py-5 courses-section" id="cursos">
+    <div class="container">
+      <div class="section-heading text-center mb-4"><span class="small-text">Aula virtual</span><h2>Cursos disponibles</h2><p>Filtra por carrera y semestre. Cada curso abre sus cuatro secciones en una pestaña nueva.</p></div>
+      <div class="filter-box mb-4">
+        <div class="row align-items-end">
+          <div class="col-lg-4 col-md-6 col-12"><label for="careerFilter">Filtrar por carrera</label><select id="careerFilter" class="form-control"></select></div>
+          <div class="col-lg-3 col-md-6 col-12"><label for="semesterFilter">Filtrar por semestre</label><select id="semesterFilter" class="form-control"></select></div>
+          <div class="col-lg-3 col-md-6 col-12"><label for="searchCourse">Buscar curso</label><input type="search" id="searchCourse" class="form-control" placeholder="Nombre, código o docente"></div>
+          <div class="col-lg-2 col-md-6 col-12 mt-3 mt-lg-0"><button class="btn custom-btn w-100" id="clearFilters" type="button">Limpiar</button></div>
+        </div>
+      </div>
+      <div class="row" id="courseGrid"></div>
+      <div class="empty-state d-none" id="emptyCourses"><i class='uil uil-books'></i><h3>No hay cursos para mostrar</h3><p>Cambia los filtros o espera a que un administrador publique contenido.</p></div>
+    </div>
+  </section>
+
+  <section class="py-5 admin-section admin-only" id="administracion">
+    <div class="container">
+      <div class="section-heading text-center mb-5"><span class="small-text">Panel de administrador</span><h2>Crear y editar contenido</h2></div>
+      <div class="row">
+        <div class="col-lg-5 col-12 mb-4">
+          <div class="admin-card"><h3><i class='uil uil-building'></i> Carrera</h3>
+            <form id="careerForm">
+              <input type="hidden" id="editingCareerId">
+              <label for="careerName">Nombre de carrera</label><input class="form-control" id="careerName" type="text" placeholder="Ej. Ingeniería Eléctrica" required>
+              <label for="careerSemesters">Cantidad de semestres</label><input class="form-control" id="careerSemesters" type="number" min="1" max="12" value="10" required>
+              <div class="admin-actions"><button class="btn custom-btn custom-btn-bg" id="saveCareerBtn" type="submit"><i class='uil uil-save'></i> Guardar carrera</button><button class="btn custom-btn d-none" id="cancelCareerEdit" type="button">Cancelar</button></div>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-7 col-12 mb-4">
+          <div class="admin-card"><h3><i class='uil uil-book-medical'></i> Curso</h3>
+            <form id="courseForm">
+              <input type="hidden" id="editingCourseId">
+              <label for="courseCareers">Carreras del curso</label><select id="courseCareers" class="form-control" multiple size="4" required></select><small class="form-text text-muted">Puedes seleccionar varias carreras con Ctrl o Shift.</small>
+              <label for="courseSemester">Semestre</label><select id="courseSemester" class="form-control" required></select>
+              <div class="row"><div class="col-md-7"><label for="courseName">Nombre del curso</label><input class="form-control" id="courseName" type="text" placeholder="Ej. Circuitos Eléctricos 2" required></div><div class="col-md-5"><label for="courseCode">Código</label><input class="form-control" id="courseCode" type="text" placeholder="Ej. 204"></div></div>
+              <div class="row"><div class="col-md-7"><label for="courseTeacher">Docente</label><input class="form-control" id="courseTeacher" type="text" placeholder="Nombre del docente"></div><div class="col-md-5"><label for="courseYear">Año</label><input class="form-control" id="courseYear" type="number" min="2000" max="2100"></div></div>
+              <label for="courseDescription">Descripción</label><textarea class="form-control" id="courseDescription" rows="3" placeholder="Notas generales del curso"></textarea>
+              <div class="admin-actions"><button class="btn custom-btn custom-btn-bg" id="saveCourseBtn" type="submit"><i class='uil uil-save'></i> Guardar curso</button><button class="btn custom-btn d-none" id="cancelCourseEdit" type="button">Cancelar</button></div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div id="roleControlHolder"></div>
+    </div>
+  </section>
+
+  <footer class="footer py-5"><div class="container"><p class="copyright-text text-center">Ing3nieria 2026.</p></div></footer>
+  <div class="toast-message" id="toastMessage" role="status" aria-live="polite"></div>
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/Headroom.js"></script>
+  <script src="js/jQuery.headroom.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/smoothscroll.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/custom.js"></script>
+  <script src="js/educlass-stable.js"></script>
+</body>
+</html>
