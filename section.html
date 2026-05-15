@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Materiales del curso.">
+  <title>EduClass | Materiales</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="css/tooplate-style.css">
+</head>
+<body data-page="section">
+  <nav class="navbar navbar-expand-sm navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><i class='uil uil-book-open'></i> EduClass</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegación"><span class="navbar-toggler-icon"></span><span class="navbar-toggler-icon"></span><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto"><li class="nav-item"><a href="index.html#cursos" class="nav-link"><span data-hover="Cursos">Cursos</span></a></li><li class="nav-item admin-only"><a href="index.html#administracion" class="nav-link"><span data-hover="Administración">Administración</span></a></li></ul>
+        <ul class="navbar-nav ml-lg-auto align-items-center"><li class="nav-item mr-lg-3"><button class="login-button" id="loginButton" type="button"><i class='uil uil-user-circle'></i> <span id="loginButtonText">Iniciar sesión</span></button></li><li class="ml-lg-2"><div class="color-mode d-lg-flex justify-content-center align-items-center" role="button" tabindex="0"><i class="color-mode-icon"></i> Modo de color</div></li></ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="section-page py-5">
+    <div class="container">
+      <a class="back-link" href="index.html#cursos"><i class='uil uil-arrow-left'></i> Volver a cursos</a>
+      <div class="course-hero mt-4"><div><span class="small-text" id="sectionCourseCode">Curso</span><h1 id="sectionTitle">Sección del curso</h1><p id="sectionSubtitle">Materiales publicados.</p></div><div class="section-badge" id="sectionBadge"><i class='uil uil-folder'></i></div></div>
+      <div class="row mt-5">
+        <div class="col-lg-5 col-12 mb-4 admin-only">
+          <div class="admin-card sticky-panel"><h3><i class='uil uil-cloud-upload'></i> Agregar material</h3><p class="hint-text">Puedes guardar texto o adjuntar PDF, Word, imágenes y archivos de apoyo.</p>
+            <form id="materialForm">
+              <label for="materialTitle">Título</label><input class="form-control" id="materialTitle" type="text" placeholder="Ej. Guía de laboratorio 1" required>
+              <label for="materialText">Texto o instrucciones</label><textarea class="form-control" id="materialText" rows="5" placeholder="Descripción, instrucciones, enlaces o notas del docente"></textarea>
+              <label for="materialFile">Archivo</label><input class="form-control file-control" id="materialFile" type="file" accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.webp,.gif">
+              <button class="btn custom-btn custom-btn-bg mt-3" id="saveMaterialBtn" type="submit"><i class='uil uil-save'></i> Guardar material</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-7 col-12"><div class="d-flex justify-content-between align-items-center flex-wrap mb-3"><h2 class="mb-2">Materiales guardados</h2><input type="search" class="form-control material-search" id="materialSearch" placeholder="Buscar material"></div><div id="materialList"></div><div class="empty-state d-none" id="emptyMaterials"><i class='uil uil-folder-open'></i><h3>Esta sección todavía está vacía</h3><p>Aún no hay materiales publicados.</p></div></div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer py-5"><div class="container"><p class="copyright-text text-center">Ing3nieria 2026.</p></div></footer>
+  <div class="toast-message" id="toastMessage" role="status" aria-live="polite"></div>
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/Headroom.js"></script>
+  <script src="js/jQuery.headroom.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/smoothscroll.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/custom.js"></script>
+  <script src="js/educlass-stable.js"></script>
+</body>
+</html>
