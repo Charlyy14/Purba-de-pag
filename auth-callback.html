@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduClass | Procesando sesión</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/tooplate-style.css">
+  <style>
+    body{min-height:100vh;display:grid;place-items:center;padding:24px}.callback-card{max-width:560px;width:100%;border-radius:28px;padding:34px;background:rgba(127,127,127,.08);box-shadow:0 22px 80px rgba(0,0,0,.18)}.loader{width:44px;height:44px;border-radius:50%;border:5px solid rgba(127,127,127,.25);border-top-color:currentColor;animation:spin .9s linear infinite;margin-bottom:16px}@keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <main class="callback-card"><div class="loader" id="loader"></div><h1>Procesando inicio de sesión</h1><p id="status">Guardando sesión...</p></main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script>
+    (async function(){
+      const status=document.getElementById('status');
+      const cfg=window.EDUCLASS_SUPABASE_CONFIG||{};
+      function fail(msg){document.getElementById('loader').style.display='none';status.textContent=msg;}
+      function safeNext(){const p=new URLSearchParams(location.search);const raw=p.get('next')||'/index.html';try{const d=decodeURIComponent(raw);return (!d||d.startsWith('http')||d.startsWith('//'))?'/index.html':d;}catch(_){return '/index.html';}}
+      try{
+        if(!cfg.url||!cfg.publishableKey||cfg.publishableKey==='PEGA_AQUI_TU_PUBLISHABLE_KEY') return fail('Falta configurar Supabase.');
+        const client=window.supabase.createClient(cfg.url,cfg.publishableKey,{auth:{storageKey:'educlass-auth-stable-v4',persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,flowType:'implicit',storage:window.localStorage}});
+        const url=new URL(location.href); const hash=new URLSearchParams(String(location.hash||'').replace(/^#/,''));
+        const code=url.searchParams.get('code');
+        const access=hash.get('access_token'), refresh=hash.get('refresh_token');
+        if(access&&refresh){
+          const {error}=await client.auth.setSession({access_token:access,refresh_token:refresh});
+          if(error) throw error;
+        } else if(code){
+          const {error}=await client.auth.exchangeCodeForSession(code);
+          if(error && !String(error.message||'').toLowerCase().includes('code verifier')) throw error;
+        }
+        const {data,error}=await client.auth.getSession();
+        if(error) throw error;
+        if(!data.session) throw new Error('No se pudo guardar la sesión. Regresa e intenta iniciar sesión otra vez.');
+        localStorage.setItem('educlass-session-backup-stable-v4', JSON.stringify({access_token:data.session.access_token, refresh_token:data.session.refresh_token, expires_at:data.session.expires_at, saved_at:Date.now()}));
+        status.textContent='Sesión lista. Regresando...';
+        location.replace(safeNext());
+      }catch(e){console.error(e);fail(e.message||'No se pudo completar el inicio de sesión.');}
+    })();
+  </script>
+</body>
+</html>
